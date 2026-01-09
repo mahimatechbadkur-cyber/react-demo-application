@@ -1,12 +1,11 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import BookShopHeaderBar from './components/BookShopHeaderBar'
 
 function App() {
   return (
     <>
-      <h2>Book Store</h2>
+    <div>
+      <BookShopHeaderBar />
+      </div>
     </>
   )
 }
