@@ -9,10 +9,10 @@ function BookShopHeaderBar() {
     <>
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-         <Typography variant="h5" sx={{ flexGrow: 1, pl:4, textAlign: 'center'}}>
+         <Typography variant="h5" sx={{ flexGrow: 1, p:1, textAlign: 'center'}}>
               {textContent.headingText}
           </Typography>
-           <Typography variant="body2" component="div" sx={{ flexGrow: 1, pl:2, bgcolor:'#4CAF50' }}>
+           <Typography variant="subtitle2" component="div" sx={{ flexGrow: 1, pl:2, bgcolor:'black' }}>
              {textContent.discountText}
           </Typography>
           </AppBar>

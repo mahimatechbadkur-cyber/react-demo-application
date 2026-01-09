@@ -8,9 +8,6 @@ describe('BookShopHeaderBar component', () => {
   it('render header for Bookshop', () => {
     render(<BookShopHeaderBar />);
     expect(screen.getByRole('heading').textContent).toBe(textContent.headingText);
-  });
-  it('render header for Bookshop', () => {
-    render(<BookShopHeaderBar />);
     expect(screen.getByText(/Discount on different book purchase/i)).toBeInTheDocument()
   });
 });
