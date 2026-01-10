@@ -17,7 +17,9 @@ export const textContent = {
     subtotal: '200',
     discountedPrice: '100',
     totalAmount: '100'
-  }
+  },
+  emptyCartText: 'Your cart is empty',
+  emptyCartSubtitle: 'Browse our amazing products!'
 }
 export const bookList = [
   { id: 1,title: 'Clean Code', price: 50 },
@@ -33,7 +35,9 @@ export const dataTestIds = {
   bookShopHomePage: 'bookShopHomePage',    
   showBookList: 'showBookList',
   viewCartItemsPage: 'viewCartItemsPage',
-  viewCartSummaryPage: 'viewCartSummaryPage'
+  viewCartSummaryPage: 'viewCartSummaryPage',
+  emptyCartView: 'emptyCartView',
+  emptyCartShoppingCartIcon: 'emptyCartShoppingCartIcon'
 }
  
 export const dummyCartItem = [
