@@ -4,9 +4,9 @@ import BookShopHomePage from './components/BookShopHomePage'
 function App() {
   return (
     <>
-    <div>
-      <BookShopHeaderBar />
-      <BookShopHomePage />
+      <div>
+        <BookShopHeaderBar />
+        <BookShopHomePage />
       </div>
     </>
   )

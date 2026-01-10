@@ -3,6 +3,7 @@ import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
+import noComments from "eslint-plugin-no-comments";
 
 export default defineConfig([
   globalIgnores(['dist']),
@@ -22,8 +23,14 @@ export default defineConfig([
         sourceType: 'module',
       },
     },
+    plugins: {
+      "no-comments": noComments,
+    },
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      "indent": ["error", 2],
+      "no-inline-comments": "error",
+      "no-comments/disallowComments": "error", 
     },
   },
 ])

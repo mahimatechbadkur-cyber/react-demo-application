@@ -6,12 +6,12 @@ import workingEffectivelyWithLegacyCodeImage from '../assets/WorkingEffectivelyW
  
 
 export const getImageURL = (bookTitle) => {
-    const imageMap = {
-        'Clean Code': cleanCodeImage,
-        'The Clean Coder': cleanCoderImage,   
-        'Clean Architecture': cleanArchitectureImage,
-        'Test Driven Development by Example': testDrivenDevelopmentImage,
-        'Working Effectively With Legacy Code': workingEffectivelyWithLegacyCodeImage,
-    };
-    return imageMap[bookTitle] ;
+  const imageMap = {
+    'Clean Code': cleanCodeImage,
+    'The Clean Coder': cleanCoderImage,   
+    'Clean Architecture': cleanArchitectureImage,
+    'Test Driven Development by Example': testDrivenDevelopmentImage,
+    'Working Effectively With Legacy Code': workingEffectivelyWithLegacyCodeImage,
+  };
+  return imageMap[bookTitle] ;
 }

@@ -6,10 +6,10 @@ import { dataTestIds } from '../common/constants';
 function BookShopHomePage() {
   return (
     <>
-    <Grid data-testid ={dataTestIds.bookShopHomePage} container spacing={1} sx={{pt:1}}>
-      <ShowBookList />
-      <ViewCartItems />
-    </Grid>
+      <Grid data-testid ={dataTestIds.bookShopHomePage} container spacing={1} sx={{pt:1}}>
+        <ShowBookList />
+        <ViewCartItems />
+      </Grid>
     </>
   )
 }
