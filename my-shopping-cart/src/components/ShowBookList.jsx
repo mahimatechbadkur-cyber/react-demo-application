@@ -10,19 +10,22 @@ import { bookList, currency, dataTestIds, textContent } from '../common/constant
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
 import { getImageURL } from '../utils/getImageURL';
-
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import IconButton from '@mui/material/IconButton';
+import { useCart } from '../context/CardProvider';
 
 function ShowBookList() {
-
-  const BookActions = ({ book}) => (
+  const { addToCart, decreaseQuantity } = useCart();
+  const BookActions = ({ book }) => (
     <>
       <Stack direction="row" spacing={1}>
-        <Button variant="contained" size="small">
-          {textContent.addToCartButtonText}
-        </Button>
-        <Button variant="contained" size="small">
-          {textContent.clearButtonText}
-        </Button>
+        <IconButton onClick={() => addToCart(book)}  aria-label="addIcon" color="primary" size="small">
+          <AddIcon />
+        </IconButton>
+        <IconButton onClick={()=>decreaseQuantity(book.id)} aria-label="removeIcon" color="primary" size="small">
+          <RemoveIcon />
+        </IconButton>
       </Stack>
       <Box sx={{ flexGrow: 1 }} />
       <Typography variant="caption" sx={{ fontWeight: 'bold' }}>

@@ -2,7 +2,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import { textContent, dummyCartItem,currency, dataTestIds } from '../common/constants';
+import { textContent, currency, dataTestIds } from '../common/constants';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
@@ -11,9 +11,10 @@ import CardContent from '@mui/material/CardContent';
 import CloseIcon from '@mui/icons-material/Close';
 import ViewCartSummary from './ViewCartSummary'
 import EmptyCartView from './EmptyCartView';
+import { useCart } from '../context/CardProvider';
 
 function ViewCartItems() {
-
+  const { cart } = useCart();
   const GetCartList = ({ cartItem }) => (
     <Card sx={{ display: 'flex', bgcolor:'grey.100', m: 1 }} key={cartItem.id} >
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -50,15 +51,15 @@ function ViewCartItems() {
 
   return (
     <>
-      <Grid size={{ xs: 12, md: 4 }} sx={{ border: '1px solid #ccc', bgcolor:'grey.200' }} data-testid ={dataTestIds.viewCartItemsPage}>
-        <Typography variant="h5"sx={{p:1,pl:2,bgcolor:'grey.300'}} >{textContent.cartItemListHeaderTitle}</Typography>
+      <Grid size= {{ xs: 12, md: 4 }} sx= {{ border: '1px solid #ccc', bgcolor:'grey.200' }} data-testid ={dataTestIds.viewCartItemsPage}>
+        <Typography variant= "h5" sx= {{ p:1, pl:2, bgcolor: 'grey.300' }} >{textContent.cartItemListHeaderTitle}</Typography>
         <Divider />
-        {dummyCartItem.length>0 ? (
+        {cart.length > 0 ? (
           <>
-            {dummyCartItem.map((cartItem) => (
+            {cart.map((cartItem) => (
               <GetCartList cartItem={cartItem} key={cartItem.id} />
             ))}
-            <Divider sx={{boxShadow:2, ml:1,mr:1}}/>
+            <Divider sx={{ boxShadow: 2, ml: 1, mr: 1 }}/>
             <ViewCartSummary />
           </>
         ) : <EmptyCartView />}

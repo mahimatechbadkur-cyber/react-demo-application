@@ -31,6 +31,10 @@ export default defineConfig([
       "indent": ["error", 2],
       "no-inline-comments": "error",
       "no-comments/disallowComments": "error", 
+      "react-refresh/only-export-components": [
+        "warn",
+        { allowConstantExport: true }, 
+      ],
     },
   },
 ])
