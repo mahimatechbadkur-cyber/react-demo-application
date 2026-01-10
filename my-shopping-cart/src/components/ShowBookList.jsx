@@ -54,16 +54,14 @@ const BookList = ({ book}) => (
   return (
     <>
      <Grid data-testid={dataTestIds.showBookList} size={{ xs: 12, md: 8 }} sx={{ border: '1px solid #ccc', bgcolor:'grey.200' }}>
-        <Typography variant="h5"sx={{p:1,pl:2,bgcolor:'grey.300'}} >{textContent.bookListHeaderTitle}</Typography>
+        <Typography variant="h5"sx={{p:1,pl:2,bgcolor:'grey.300'}}>{textContent.bookListHeaderTitle}</Typography>
         <Divider />
           <Grid container spacing={2} sx={{p:2}}>
             {bookList.map((book) => (
             <BookList
-                key={book.id}
                 book={book} 
-                textContent={textContent} 
-                currency={currency} 
-                getImageURL={getImageURL}  />
+                key ={book.id}
+                />
                 ))} 
           </Grid>
         </Grid>
