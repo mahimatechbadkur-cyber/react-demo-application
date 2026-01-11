@@ -1,68 +1,82 @@
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { CartProvider, useCart } from '../context/CardProvider';
+import { expect, describe, it, vi } from 'vitest'; 
 
-import { render, screen, fireEvent } from '@testing-library/react';
-import { CartProvider } from '../context/CardProvider';
-import App from '../App'
-import { dataTestIds} from '../common/constants';
-import { describe, it, expect } from 'vitest';
 
-describe('CartProvider test', () => {
-  it('should render EmptyCartView Component when cart is empty', () => {
+const CartTester = () => {
+  const { cart, addToCart, decreaseQuantity, removeFromCart, clearCart, totalItems } = useCart();
+  
+  return (
+    <div>
+      <p data-testid="total-count">{totalItems}</p>
+      <p data-testid="unique-count">{cart.length}</p>
+      
+      <button onClick={() => addToCart({ id: 1, name: 'Product A' })}>Add A</button>
+      <button onClick={() => decreaseQuantity(1)}>Decrease A</button>
+      <button onClick={() => removeFromCart(1)}>Remove A</button>
+      <button onClick={() => clearCart()}>Clear All</button>
+
+      <ul>
+        {cart.map(item => (
+          <li key={item.id} data-testid={`item-${item.id}`}>
+            {item.name} - Qty: {item.quantity}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+describe('CartProvider Logic', () => {
+  it('should handle all cart operations correctly', async () => {
+    const user = userEvent.setup();
     render(
       <CartProvider>
-        <App />
+        <CartTester />
       </CartProvider>
     );
-    expect(screen.getByTestId(dataTestIds.emptyCartView)).toBeInTheDocument();
-  });
-  it('Should increase the cart item count by 1 on add button click', () => {
-    render(
-      <CartProvider>
-        <App />
-      </CartProvider>
-    );
-    const addButton = screen.getAllByRole('button', { name: /addIcon/i });
-    fireEvent.click(addButton[0]);
-    expect(screen.getByText(/Quantity: 1/i)).toBeInTheDocument();
-  });
-  it('Should drcrease the cart item count by 1 on remove button click', () => {
-    render(
-      <CartProvider>
-        <App />
-      </CartProvider>
-    );
-    const addButton = screen.getAllByRole('button', { name: /addIcon/i });
-    fireEvent.click(addButton[0]);
-    fireEvent.click(addButton[0]);
-    expect(screen.getByText(/Quantity: 2/i)).toBeInTheDocument();
-    const removeButton = screen.getAllByRole('button', { name: /removeIcon/i });
-    fireEvent.click(removeButton[0]);
-    expect(screen.getByText(/Quantity: 1/i)).toBeInTheDocument();
-  });
-  it('should increases the quantity by 1 when a book is already added', () => {
-    render(
-      <CartProvider>
-        <App />
-      </CartProvider>
-    );
-    const addButton = screen.getAllByRole('button', { name: /addIcon/i });
-    fireEvent.click(addButton[0]);
-    fireEvent.click(addButton[0]);
-    expect(screen.getByText(/Quantity: 2/i)).toBeInTheDocument();
-  });
+
     
-  it('adds multiple different title Books', () => {
-    render(
-      <CartProvider>
-        <App />
-      </CartProvider>
-    );
-    const addButton = screen.getAllByRole('button', { name: /addIcon/i });
-    fireEvent.click(addButton[0]);
-    fireEvent.click(addButton[1]);
-    fireEvent.click(addButton[2]);
-    expect(screen.getAllByText(/Quantity: 1/i)[0]).toBeInTheDocument();
-    expect(screen.getAllByText(/Quantity: 1/i)[1]).toBeInTheDocument();
-    expect(screen.getAllByText(/Quantity: 1/i)[2]).toBeInTheDocument();
+    expect(screen.getByTestId('total-count')).toHaveTextContent('0');
+
+    
+    await user.click(screen.getByText('Add A'));
+    expect(screen.getByTestId('total-count')).toHaveTextContent('1');
+    expect(screen.getByTestId('item-1')).toHaveTextContent('Qty: 1');
+
+    
+    await user.click(screen.getByText('Add A'));
+    expect(screen.getByTestId('total-count')).toHaveTextContent('2');
+    expect(screen.getByTestId('item-1')).toHaveTextContent('Qty: 2');
+
+    
+    await user.click(screen.getByText('Decrease A'));
+    expect(screen.getByTestId('total-count')).toHaveTextContent('1');
+    expect(screen.getByTestId('item-1')).toHaveTextContent('Qty: 1');
+
+    
+    await user.click(screen.getByText('Decrease A'));
+    expect(screen.getByTestId('unique-count')).toHaveTextContent('0');
+    expect(screen.queryByTestId('item-1')).not.toBeInTheDocument();
+
+    
+    await user.click(screen.getByText('Add A'));
+    await user.click(screen.getByText('Remove A'));
+    expect(screen.getByTestId('unique-count')).toHaveTextContent('0');
+
+    
+    await user.click(screen.getByText('Add A'));
+    await user.click(screen.getByText('Clear All'));
+    expect(screen.getByTestId('total-count')).toHaveTextContent('0');
   });
 
+  it('throws error when used outside of CartProvider', () => {
+    
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    
+    expect(() => render(<CartTester />)).toThrow('useCart must be used within a CartProvider');
+    
+    consoleSpy.mockRestore();
+  });
 });

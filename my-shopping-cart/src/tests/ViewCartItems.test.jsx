@@ -1,12 +1,13 @@
-import { render, screen,cleanup } from '@testing-library/react';
+import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import ViewCartItems  from '../components/ViewCartItems';
 import { dataTestIds,textContent, currency} from '../common/constants';
 import { afterEach,vi,beforeEach } from 'vitest';
 
 let mockCart = [];
+const removeFromCartMock = vi.fn();
 vi.mock('../context/CardProvider', () => ({
-  useCart: () => ({ cart: mockCart }),
+  useCart: () => ({ cart: mockCart, removeFromCart: removeFromCartMock, }),
 }));
 beforeEach(() => { mockCart = []; });
 afterEach(() => { cleanup(); vi.resetAllMocks(); });
@@ -28,5 +29,8 @@ describe('ViewCartItems component', () => {
     expect(screen.getAllByText(mockCart[0].price + ' ' + currency)[0].textContent).toBe('50 EUR');
     expect(screen.getAllByText(textContent.quantityText +':'+ ' ' + mockCart[0].quantity)[0].textContent).toBe('Quantity: 2');
     expect(screen.getAllByText(textContent.removeCartButtonTitle)[4].textContent).toBe(textContent.removeCartButtonTitle);
+    const removeButton = screen.getAllByRole('button', { name: /remove/i });
+    fireEvent.click(removeButton[0]);
+    expect(removeFromCartMock).toHaveBeenCalledTimes(1);
   });
 });

@@ -10,7 +10,7 @@ const decreaseQuantityMock = vi.fn();
 vi.mock('../context/CardProvider', () => ({
   useCart: () => ({ addToCart: addToCartMock,
     decreaseQuantity: decreaseQuantityMock
-   }),
+  }),
 }));
 
 afterEach(() => {
@@ -24,10 +24,10 @@ describe('ShowBookList component', () => {
     render(<ShowBookList />);
     expect(screen.getByTestId(dataTestIds.showBookList)).toBeInTheDocument();
     expect(screen.getByRole('heading').textContent).toBe(textContent.bookListHeaderTitle);
-   const addButton = screen.getAllByRole('button', { name: /addIcon/i });
-   const removeButton = screen.getAllByRole('button', { name: /removeIcon/i });
-   expect(addButton[0]).toBeInTheDocument();
-   expect(removeButton[0]).toBeInTheDocument();
+    const addButton = screen.getAllByRole('button', { name: /addIcon/i });
+    const removeButton = screen.getAllByRole('button', { name: /removeIcon/i });
+    expect(addButton[0]).toBeInTheDocument();
+    expect(removeButton[0]).toBeInTheDocument();
     expect(screen.getAllByText(bookList[0].price + ' ' + currency)[0].textContent).toBe(bookList[0].price + ' ' + currency);
   });
 });

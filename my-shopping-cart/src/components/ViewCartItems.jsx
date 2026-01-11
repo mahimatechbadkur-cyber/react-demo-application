@@ -14,7 +14,7 @@ import EmptyCartView from './EmptyCartView';
 import { useCart } from '../context/CardProvider';
 
 function ViewCartItems() {
-  const { cart } = useCart();
+  const { cart, removeFromCart } = useCart();
   const GetCartList = ({ cartItem }) => (
     <Card sx={{ display: 'flex', bgcolor:'grey.100', m: 1 }} key={cartItem.id} >
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -43,7 +43,7 @@ function ViewCartItems() {
           </Stack>
         </CardContent>
         <CardActions>
-          <Button size="small"  startIcon={<CloseIcon  size="small"/>} sx={{p:0, pl:1}}>{textContent.removeCartButtonTitle}</Button>
+          <Button  onClick={()=>removeFromCart(cartItem.id)} size="small"  startIcon={<CloseIcon  size="small"/>} sx={{p:0, pl:1}}>{textContent.removeCartButtonTitle}</Button>
         </CardActions>
       </Box>
     </Card>
@@ -60,7 +60,7 @@ function ViewCartItems() {
               <GetCartList cartItem={cartItem} key={cartItem.id} />
             ))}
             <Divider sx={{ boxShadow: 2, ml: 1, mr: 1 }}/>
-            <ViewCartSummary />
+            <ViewCartSummary  />
           </>
         ) : <EmptyCartView />}
       </Grid>
