@@ -51,4 +51,20 @@ describe('BookShopHomePage component', () => {
     fireEvent.click(removeButtons[0]);
     expect(screen.getAllByText('Quantity: 1')[0]).toBeInTheDocument(); 
   });
+  it('removes item regardless of quantity',  async() => {
+    render(
+      <CartProvider>
+        <BookShopHomePage />
+      </CartProvider>
+    )
+    const addButton = screen.getAllByRole('button', { name: /addIcon/i });
+    expect(addButton[0]).toBeInTheDocument();
+    fireEvent.click(addButton[0]);
+    fireEvent.click(addButton[0]);
+    expect(screen.getAllByText('Clean Code')[0]).toBeInTheDocument();
+    expect(screen.getAllByText('Quantity: 2')[0]).toBeInTheDocument();
+    const removeButtons = screen.getAllByTestId(dataTestIds.removeFromCartButton);
+    fireEvent.click(removeButtons[0]);
+    expect(screen.queryByText('Quantity: 2')).not.toBeInTheDocument(); 
+  });
 });
