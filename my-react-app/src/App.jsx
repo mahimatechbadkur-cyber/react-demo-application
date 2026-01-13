@@ -1,8 +1,10 @@
+import React from 'react'
+import BookShopHeaderBar from './components/BookShopHeaderBar.jsx'
 
 function App() {
   return (
     <>
-      <h1>Hello, React!</h1>
+      <BookShopHeaderBar />
     </>
   )
 }
