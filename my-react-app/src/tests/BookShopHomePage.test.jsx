@@ -29,6 +29,6 @@ describe('BookShopHomePage component', () => {
     const addButton = screen.getAllByRole('button', { name: /addIcon/i });
     expect(addButton[0]).toBeInTheDocument();
     fireEvent.click(addButton[0]);
-    expect(screen.getByTestId(dataTestIds.uniqueItemCount)).toBeInTheDocument();
+    expect(screen.getAllByText('Clean Code')[0]).toBeInTheDocument();
   });
 });

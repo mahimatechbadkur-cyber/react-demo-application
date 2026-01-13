@@ -4,6 +4,7 @@ export const textContent = {
   discountText : 'Discount on different book purchase  2 books - 5% | 3 books - 10% | 4 books - 20% | 5 books - 25%',
   bookListHeaderTitle : 'List of Available Books',
   cartItemListHeaderTitle : 'Your Cart',
+  quantityText: 'Quantity',
 }
 
 export const dataTestIds = {
@@ -12,3 +13,5 @@ export const dataTestIds = {
   viewCartItemsPage : 'viewCartItemsPage',
   uniqueItemCount : 'uniqueItemCount',
 }
+
+export const currency = 'EUR';

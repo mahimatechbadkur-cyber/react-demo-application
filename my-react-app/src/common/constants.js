@@ -4,6 +4,7 @@ export const textContent = {
   discountText : 'Discount on different book purchase  2 books - 5% | 3 books - 10% | 4 books - 20% | 5 books - 25%',
   bookListHeaderTitle : 'List of Available Books',
   cartItemListHeaderTitle : 'Your Cart',
+  quantityText: 'Quantity',
 }
 
 export const dataTestIds = {
@@ -19,3 +20,5 @@ export const bookList = [
   { id: 4, title: 'Test Driven Development by Example', price: 50 },
   { id: 5, title: 'Working Effectively With Legacy Code', price: 50 },
 ];
+
+export const currency = 'EUR';
