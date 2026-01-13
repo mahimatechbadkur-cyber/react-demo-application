@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';;
 import { CardActionArea } from '@mui/material';
-import { bookList, dataTestIds, textContent } from '../common/constants'; 
+import { bookList, currency, dataTestIds, textContent } from '../common/constants'; 
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
 import { getImageURL } from '../utils/getImageURL';
@@ -16,12 +16,21 @@ import IconButton from '@mui/material/IconButton';
 import { useCart } from '../context/CartProvider';
 
 function ShowBookList() {
-  const { addToCart } = useCart();
+  const { addToCart, decreaseQuantity } = useCart();
   const BookActions = ({ book }) => (
     <>
-      <IconButton onClick={() => addToCart(book)}  aria-label="addIcon" color="primary" size="small">
-        <AddIcon />
-      </IconButton>
+      <Stack direction="row" spacing={1}>
+        <IconButton onClick={() => addToCart(book)}  aria-label="addIcon" color="primary" size="small">
+          <AddIcon />
+        </IconButton>
+        <IconButton onClick={()=>decreaseQuantity(book.id)} aria-label="removeIcon" color="primary" size="small">
+          <RemoveIcon />
+        </IconButton>
+      </Stack>
+      <Box sx={{ flexGrow: 1 }} />
+      <Typography variant="caption" sx={{ fontWeight: 'bold' }}>
+        {book.price} {currency}
+      </Typography>
     </>
   );
 

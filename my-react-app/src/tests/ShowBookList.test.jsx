@@ -31,5 +31,9 @@ describe('ShowBookList component', () => {
     );
     const addButton = screen.getAllByRole('button', { name: /addIcon/i });
     expect(addButton[0]).toBeInTheDocument();
+    const removeButton = screen.getAllByRole('button', { name: /removeIcon/i });
+    expect(removeButton[0]).toBeInTheDocument();
+    const expectedPriceText = '50 EUR'
+    expect(screen.getAllByText(expectedPriceText)[0]).toBeInTheDocument();
   });
 });
