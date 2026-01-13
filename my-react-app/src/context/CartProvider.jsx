@@ -11,11 +11,9 @@ export const CartProvider = ({ children }) => {
       const existingItem = prevCart.find(item => item.id === product.id);
       if (existingItem) {
         
-        const val = prevCart.map(item =>
+        return prevCart.map(item =>
           item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
         );
-        console.log('Existing item found. Incrementing quantity.', val); 
-        return val;
       }
       return [...prevCart, { ...product, quantity: 1 }];
     });

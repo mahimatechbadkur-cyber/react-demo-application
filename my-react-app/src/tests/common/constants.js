@@ -10,4 +10,5 @@ export const dataTestIds = {
   bookShopHomePage : 'bookShopHomePage',
   showBookList : 'showBookList',
   viewCartItemsPage : 'viewCartItemsPage',
+  uniqueItemCount : 'uniqueItemCount',
 }

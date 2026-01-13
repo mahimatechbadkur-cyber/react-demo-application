@@ -35,10 +35,7 @@ describe('CartProvider Logic', () => {
     await user.click(screen.getByText('Add A'));
     expect(screen.getByTestId('cart-count')).toHaveTextContent('1');
     expect(screen.getByTestId('item-1')).toHaveTextContent('Qty: 1');
-
-    
     await user.click(screen.getByText('Add A'));
-    console.log(screen.getByTestId('cart-count').textContent);
     expect(screen.getByTestId('item-1')).toHaveTextContent('Qty: 2');
   });
 

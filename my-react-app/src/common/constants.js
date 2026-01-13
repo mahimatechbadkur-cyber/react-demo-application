@@ -10,6 +10,7 @@ export const dataTestIds = {
   bookShopHomePage : 'bookShopHomePage',
   showBookList : 'showBookList',
   viewCartItemsPage : 'viewCartItemsPage',
+  uniqueItemCount : 'uniqueItemCount',
 }
 export const bookList = [
   { id: 1,title: 'Clean Code', price: 50 },
