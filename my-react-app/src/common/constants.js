@@ -5,13 +5,16 @@ export const textContent = {
   bookListHeaderTitle : 'List of Available Books',
   cartItemListHeaderTitle : 'Your Cart',
   quantityText: 'Quantity',
+  emptyCartText: 'Your cart is empty',
+  emptyCartSubtitle: 'Browse our amazing products!'
 }
 
 export const dataTestIds = {
   bookShopHomePage : 'bookShopHomePage',
   showBookList : 'showBookList',
   viewCartItemsPage : 'viewCartItemsPage',
-  uniqueItemCount : 'uniqueItemCount',
+  emptyCartView: 'emptyCartView',
+  emptyCartShoppingCartIcon: 'emptyCartShoppingCartIcon',
 }
 export const bookList = [
   { id: 1,title: 'Clean Code', price: 50 },
