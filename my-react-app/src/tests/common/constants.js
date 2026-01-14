@@ -8,6 +8,10 @@ export const textContent = {
   emptyCartText: 'Your cart is empty',
   emptyCartSubtitle: 'Browse our amazing products!',
   removeCartButtonTitle : 'Remove',
+  totalAmountText : 'Total Amount',
+  orderSummaryText : 'Order Summary',
+  subtotalText: 'Subtotal',
+  discountedPriceText: 'Discounted Price',
 }
 
 export const dataTestIds = {
@@ -17,6 +21,7 @@ export const dataTestIds = {
   emptyCartView: 'emptyCartView',
   emptyCartShoppingCartIcon: 'emptyCartShoppingCartIcon',
   removeFromCartButton: 'removeFromCartButton',
+  viewCartSummaryPage: 'viewCartSummaryPage',
 }
 
 export const currency = 'EUR';
