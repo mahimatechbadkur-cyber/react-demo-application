@@ -9,16 +9,16 @@ describe('getDiscountRate', () => {
     expect(getDiscountRate(5)).toBe(25); 
   });
 
-  it('calculateCartTotals returns subTotal and total with 0 discount', () => {
+  it('calculateCartTotals returns subTotal and total with discount', () => {
     const books = [
-      { id: 1, price: 8, quantity: 1 },
-      { id: 2, price: 8, quantity: 1 }
+      { id: 1, price: 50, quantity: 1 },
+      { id: 2, price: 50, quantity: 1 }
     ];
     const result = calculateCartTotals(books);
     expect(result).toEqual({
-      subTotal: 16,
-      discount: 0,
-      total: 16
+      subTotal: 100,
+      discount: 5,
+      total: 95
     });
   });
 });

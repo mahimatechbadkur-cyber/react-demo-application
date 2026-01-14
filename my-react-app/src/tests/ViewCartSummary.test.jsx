@@ -25,7 +25,7 @@ describe('ViewCartSummary component', () => {
     expect(screen.getByText(/Discounted Price/i)).toBeInTheDocument();
     expect(screen.getByText(/Total Amount/i)).toBeInTheDocument();
   });
-  it('renders a  items with no discount', () => {
+  it('renders a items with no discount', () => {
     renderWithProvider(<BookShopHomePage />);
     const addButton = screen.getAllByRole('button', { name: /addIcon/i });
     fireEvent.click(addButton[0]);
@@ -33,4 +33,48 @@ describe('ViewCartSummary component', () => {
     expect(screen.getByText(/Discounted Price: 0 EUR/i)).toBeInTheDocument();
     expect(screen.getByText(/Total Amount: 50 EUR/i)).toBeInTheDocument();
   });
+  it('calculates 25% discount for 5 different books (single quantities)', () => {
+    renderWithProvider(<BookShopHomePage />);
+    const addButton = screen.getAllByRole('button', { name: /addIcon/i });
+    fireEvent.click(addButton[0]);
+    fireEvent.click(addButton[1]);
+    fireEvent.click(addButton[2]);
+    fireEvent.click(addButton[3]);
+    fireEvent.click(addButton[4]);
+    expect(screen.getByText(/Subtotal: 250 EUR/i)).toBeInTheDocument();
+    expect(screen.getByText(/Discounted Price: 62.5 EUR/i)).toBeInTheDocument();
+    expect(screen.getByText(/Total Amount: 187.5 EUR/i)).toBeInTheDocument();
+  });
+
+  it('calculates 20% discount for 4 different books', () => {
+    renderWithProvider(<BookShopHomePage />);
+    const addButton = screen.getAllByRole('button', { name: /addIcon/i });
+    fireEvent.click(addButton[0]);
+    fireEvent.click(addButton[1]);
+    fireEvent.click(addButton[2]);
+    fireEvent.click(addButton[3]);
+    expect(screen.getByText(/Subtotal: 200 EUR/i)).toBeInTheDocument();
+    expect(screen.getByText(/Discounted Price: 40 EUR/i)).toBeInTheDocument();
+  });
+
+  it('calculates 10% discount for 3 different books', () => {
+    renderWithProvider(<BookShopHomePage />);
+    const addButton = screen.getAllByRole('button', { name: /addIcon/i });
+    fireEvent.click(addButton[0]);
+    fireEvent.click(addButton[1]);
+    fireEvent.click(addButton[2]);
+    expect(screen.getByText(/Subtotal: 150 EUR/i)).toBeInTheDocument();
+    expect(screen.getByText(/Discounted Price: 15 EUR/i)).toBeInTheDocument();
+  });
+
+  it('calculates 5% discount for 2 different books', () => {
+    renderWithProvider(<BookShopHomePage />);
+    const addButton = screen.getAllByRole('button', { name: /addIcon/i });
+    fireEvent.click(addButton[0]);
+    fireEvent.click(addButton[1]);
+    expect(screen.getByText(/Subtotal: 100 EUR/i)).toBeInTheDocument();
+    expect(screen.getByText(/Discounted Price: 5 EUR/i)).toBeInTheDocument();
+    expect(screen.getByText(/Total Amount: 95 EUR/i)).toBeInTheDocument();
+  });
+
 })

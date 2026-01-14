@@ -1,4 +1,6 @@
 import { DISCOUNT_TIERS } from "../common/constants";
+import { computeBestPriceCents } from "./getMinimumPrice";
+import { toEuros } from "./mathUtils";
 
 export const getDiscountRate = (size) => {
   switch (true) {
@@ -17,18 +19,26 @@ export const getDiscountRate = (size) => {
 
 
 const calculateSubTotalsPrice = (books) => {
-  return books.reduce((totalAmount, book) => totalAmount + book.quantity * book.price, 0);
-}
-
-const calculateDiscount = () => {
-  return 0
+  const subTotal =books.reduce((totalAmount, book) => totalAmount + book.quantity * book.price, 0);
+  return Math.round(subTotal * 100);
 }
 
 
 export const calculateCartTotals = (books) => {
   if (books.length === 0) return { subTotal: 0, discount: 0, total: 0 };
-  const subTotal = calculateSubTotalsPrice(books);
-  const discount = calculateDiscount(books);
-  const total = subTotal - discount;
-  return { subTotal: subTotal , discount: discount, total: total };
+
+  const subTotalCents = calculateSubTotalsPrice(books);
+
+  const pricesCents = books.map(book => Math.round((book.price || 0) * 100));
+  const bookCounts = books.map(book => book.quantity || 0);
+
+  const minPrice = computeBestPriceCents(bookCounts, pricesCents);
+
+  const discount = subTotalCents - minPrice;
+  
+  return {
+    subTotal: toEuros(subTotalCents),
+    total: toEuros(minPrice),
+    discount: toEuros(discount),
+  };
 }
