@@ -33,3 +33,10 @@ export const bookList = [
 ];
 
 export const currency = 'EUR';
+
+export const DISCOUNT_TIERS = [
+  { size: 5, rate: 25 },
+  { size: 4, rate: 20 },
+  { size: 3, rate: 10 },
+  { size: 2, rate: 5 }
+];
